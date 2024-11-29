@@ -1,0 +1,13 @@
+{{- /* Get stats data */ -}}
+{{- with .Site.Data.stats.build_info -}}
+<blockquote class="build-stats">
+    <p>This is build number {{ .build_number }}, representing the {{ .total_commits }}{{ if eq (mod .total_commits 10) 1 }}st{{ else if eq (mod .total_commits 10) 2 }}nd{{ else if eq (mod .total_commits 10) 3 }}rd{{ else }}th{{ end }} commit. Generated with Hugo {{ .hugo_version }} on {{ dateFormat "January 2, 2006" .build_date }}.</p>
+    
+    <p>In the {{ .days_since_start }} days since this project began, we've seen {{ .content_commits }} content changes and {{ .theme_commits }} theme refinements. Like the original Doves Type, rescued piece by piece from the Thames, each iteration brings us closer to perfection.</p>
+
+    <div class="build-stats-details">
+        <p class="fun-fact">Content and theme commits: {{ add .content_commits .theme_commits }}</p>
+        <p class="fun-fact">Daily commit rate: {{ printf "%.2f" (div (float .total_commits) (float .days_since_start)) }}</p>
+    </div>
+</blockquote>
+{{- end -}}

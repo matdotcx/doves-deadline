@@ -1,0 +1,201 @@
+/* Syntax Highlighting for Doves Theme using Flexoki colors with Deadline orange */
+:root {
+    --syntax-bg: #fffcf0;
+    --syntax-default: #100f0f;
+    --syntax-comment: #6f6e69;
+    --syntax-keyword: #ff7900; /* Deadline orange */
+    --syntax-function: #3a94c5;
+    --syntax-string: #66800b;
+    --syntax-number: #966307;
+    --syntax-class: #3f8687;
+    --syntax-variable: #af3029;
+    --syntax-operator: #3a94c5;
+    --syntax-punctuation: #100f0f;
+    --syntax-property: #3a94c5;
+    --syntax-highlight: rgba(255, 121, 0, 0.1);
+    --syntax-line-number: #6f6e69;
+}
+
+[data-theme="dark"] {
+    --syntax-bg: #100f0f;
+    --syntax-default: #fffcf0;
+    --syntax-comment: #878580;
+    --syntax-keyword: #ff9248; /* Deadline dark mode orange */
+    --syntax-function: #4385be;
+    --syntax-string: #879a39;
+    --syntax-number: #d0a215;
+    --syntax-class: #3aa99f;
+    --syntax-variable: #d14d41;
+    --syntax-operator: #4385be;
+    --syntax-punctuation: #fffcf0;
+    --syntax-property: #4385be;
+    --syntax-highlight: rgba(255, 146, 72, 0.2);
+    --syntax-line-number: #878580;
+}
+
+/* Code blocks */
+pre {
+    background: rgba(16, 15, 15, 0.03);
+    border: 1px solid rgba(16, 15, 15, 0.1);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: "Fira Code", monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] pre {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Base container */
+.highlight {
+    background: transparent;
+    color: var(--syntax-default);
+    position: relative;
+    overflow: auto;
+}
+
+/* Table structure for line numbers */
+.highlight table {
+    border-spacing: 0;
+    border: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.highlight table td {
+    padding: 0;
+    border: 0;
+    vertical-align: top;
+}
+
+/* Line numbers column - updated spacing */
+.highlight table td:first-child {
+    width: auto;
+    min-width: 2.5em;
+    text-align: right;
+    padding-right: 0.5em;
+    -webkit-user-select: none;
+    user-select: none;
+    opacity: 0.5;
+}
+
+/* Code content column - updated spacing */
+.highlight table td:last-child {
+    width: 100%;
+    padding-left: 0.5em;
+}
+
+.highlight pre {
+    margin: 0;
+    border: 0;
+}
+
+.highlight .lnt {
+    color: var(--syntax-line-number);
+    display: block;
+    padding: 0;
+}
+
+.highlight .line {
+    display: block;
+    width: 100%;
+}
+
+/* Syntax highlighting tokens */
+.highlight .c,
+.highlight .c1,
+.highlight .cm {
+    /* Comments */
+    color: var(--syntax-comment);
+    font-style: italic;
+}
+
+.highlight .k,
+.highlight .kd,
+.highlight .kn {
+    /* Keywords */
+    color: var(--syntax-keyword);
+    font-weight: 500;
+}
+
+.highlight .nf,
+.highlight .nb {
+    /* Functions */
+    color: var(--syntax-function);
+}
+
+.highlight .s,
+.highlight .s1,
+.highlight .s2 {
+    /* Strings */
+    color: var(--syntax-string);
+}
+
+.highlight .mi,
+.highlight .mf {
+    /* Numbers */
+    color: var(--syntax-number);
+}
+
+.highlight .nc {
+    /* Classes */
+    color: var(--syntax-class);
+    font-weight: 500;
+}
+
+.highlight .nv {
+    /* Variables */
+    color: var(--syntax-variable);
+}
+
+.highlight .o {
+    /* Operators */
+    color: var(--syntax-operator);
+}
+
+.highlight .p {
+    /* Punctuation */
+    color: var(--syntax-punctuation);
+}
+
+.highlight .property {
+    /* Properties */
+    color: var(--syntax-property);
+}
+
+/* Line highlighting */
+.highlight .hl {
+    background-color: var(--syntax-highlight);
+    display: block;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+}
+
+/* Optional: Line numbers */
+.highlight .ln {
+    color: var(--syntax-comment);
+    margin-right: 0.5em;
+    user-select: none;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 600px) {
+    pre {
+        padding: 1rem;
+    }
+
+    .highlight table td:first-child {
+        min-width: 2em;
+        padding-right: 0.4em;
+    }
+
+    .highlight table td:last-child {
+        padding-left: 0.4em;
+    }
+}

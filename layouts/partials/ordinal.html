@@ -1,0 +1,40 @@
+{{- /* layouts/partials/ordinal.html */ -}}
+{{- $num := . -}}
+{{- if not $num -}}
+    {{- $num = 1 -}}
+{{- end -}}
+
+{{- if eq $num 1 -}}
+    First
+{{- else if eq $num 2 -}}
+    Second
+{{- else if eq $num 3 -}}
+    Third
+{{- else if eq $num 4 -}}
+    Fourth
+{{- else if eq $num 5 -}}
+    Fifth
+{{- else if eq $num 6 -}}
+    Sixth
+{{- else if eq $num 7 -}}
+    Seventh
+{{- else if eq $num 8 -}}
+    Eighth
+{{- else if eq $num 9 -}}
+    Ninth
+{{- else -}}
+    {{- /* Use numerals with suffixes from 10th onward */ -}}
+    {{- $lastDigit := mod $num 10 -}}
+    {{- $lastTwoDigits := mod $num 100 -}}
+    {{- $suffix := "th" -}}
+    {{- if and (ne $lastTwoDigits 11) (ne $lastTwoDigits 12) (ne $lastTwoDigits 13) -}}
+        {{- if eq $lastDigit 1 -}}
+            {{- $suffix = "st" -}}
+        {{- else if eq $lastDigit 2 -}}
+            {{- $suffix = "nd" -}}
+        {{- else if eq $lastDigit 3 -}}
+            {{- $suffix = "rd" -}}
+        {{- end -}}
+    {{- end -}}
+    {{- printf "%d%s" $num $suffix -}}
+{{- end -}}

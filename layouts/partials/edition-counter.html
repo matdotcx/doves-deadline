@@ -1,0 +1,20 @@
+{{- $filepath := .File.Path -}}
+{{- $editionCount := 1 -}}
+{{- if .Site.Data.git -}}
+    {{- with (index .Site.Data.git "file-stats") -}}
+        {{- with (index . $filepath) -}}
+            {{- $editionCount = int .commits -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+<div class="edition">
+    <div class="main-line">
+        <span class="number">{{ partial "ordinal.html" (int $editionCount) }} Edition</span>
+    </div>
+    <div class="dates">
+        <div>Published &mdash;&nbsp;{{ .Date.Format "Monday, January 2, 2006" }}</div>
+        {{if ne .Date .Lastmod}}
+            <div class="revision">Revised &mdash;&nbsp;{{ .Lastmod.Format "Monday, January 2, 2006" }}</div>
+        {{end}}
+    </div>
+</div>

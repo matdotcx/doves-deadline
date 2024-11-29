@@ -1,0 +1,92 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+        {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title
+        }}{{ end }}
+    </title>
+    <meta
+        name="description"
+        content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end}}{{end}}"
+    />
+
+    <!-- CSS -->
+    {{ $style := resources.Get "css/style.css" }} {{ $syntax := resources.Get
+    "css/syntax.css" }} {{ $css := slice $style $syntax | resources.Concat
+    "css/bundle.css" | resources.Minify }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+
+    <!-- Theme Script -->
+    <script>
+        // Theme toggle functionality
+        document.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+
+            const themeToggle = document.getElementById("theme-toggle");
+            if (themeToggle) {
+                themeToggle.setAttribute("aria-pressed", "false");
+                themeToggle.addEventListener("click", toggleTheme);
+            }
+        });
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia(
+                "(prefers-color-scheme: dark)",
+            ).matches;
+
+            let theme = "light";
+            if (savedTheme) {
+                theme = savedTheme;
+            } else if (prefersDark) {
+                theme = "dark";
+            }
+
+            setTheme(theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme =
+                document.documentElement.getAttribute("data-theme") || "light";
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+
+            const toggle = document.getElementById("theme-toggle");
+            if (toggle) {
+                toggle.setAttribute(
+                    "aria-pressed",
+                    theme === "dark" ? "true" : "false",
+                );
+                toggle.setAttribute(
+                    "aria-label",
+                    theme === "dark"
+                        ? "Switch to light mode"
+                        : "Switch to dark mode",
+                );
+            }
+        }
+    </script>
+
+    <!-- Open Graph -->
+    <meta
+        property="og:title"
+        content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}"
+    />
+    <meta
+        property="og:description"
+        content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end}}{{end}}"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+
+    <!-- RSS -->
+    {{ range .AlternativeOutputFormats -}} {{ printf `
+    <link rel="%s" type="%s" href="%s" title="%s" />
+    ` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }} {{ end -}}
+</head>

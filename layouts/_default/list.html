@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="posts">
+    {{ if .IsHome }}
+        <h1 class="visually-hidden">{{ .Site.Title }}</h1>
+    {{ else }}
+        <h1>{{ .Title }}</h1>
+    {{ end }}
+
+    {{ $pages := where .Site.RegularPages "Type" "in" (slice "posts" "post") }}
+    {{ $paginator := .Paginate $pages }}
+
+    {{ if $paginator.Pages }}
+        {{ range $paginator.Pages }}
+        <article class="post">
+            <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <div class="post-meta">
+                {{ .Date.Format "Monday, January 2, 2006 • 15:04" }}
+                {{ with .Params.tags }}
+                <div class="post-tags">
+                    {{ range . }}
+                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ with .Summary }}
+            <div class="post-summary">
+                {{ . }}
+            </div>
+            {{ end }}
+        </article>
+        {{ end }}
+
+        {{ template "_internal/pagination.html" . }}
+    {{ else }}
+        <p>No posts yet. Check back soon!</p>
+    {{ end }}
+</div>
+{{ end }}

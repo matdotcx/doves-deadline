@@ -1,0 +1,66 @@
+{{ define "main" }}
+<div class="debug-info">
+    <h1>Git Debug Information</h1>
+
+    <h2>Current Page Info</h2>
+    <pre>
+File Path: {{ .File.Path }}
+Full File Path: {{ .File.Dir }}{{ .File.LogicalName }}
+Content Type: {{ .Type }}
+Page Kind: {{ .Kind }}
+    </pre>
+
+    <h2>Git Info</h2>
+    {{ with .GitInfo }}
+    <pre>
+Hash: {{ .Hash }}
+Author Name: {{ .AuthorName }}
+Author Email: {{ .AuthorEmail }}
+Author Date: {{ .AuthorDate }}
+Subject: {{ .Subject }}
+    </pre>
+    {{ else }}
+    <pre>No Git Info Available (.GitInfo is nil)</pre>
+    {{ end }}
+
+    <h2>All Files in Data</h2>
+    {{ with .Site.Data.git }}
+    <pre>
+    {{ range $path, $data := .files }}
+File: {{ $path }}
+Edition Count: {{ $data.edition_count }}
+Latest Commit: {{ $data.latest_commit.hash }}
+----------------------------------------
+    {{ end }}
+    </pre>
+    {{ else }}
+    <pre>No Git Data Available</pre>
+    {{ end }}
+
+    <h2>Raw Data Structure</h2>
+    <pre>
+    {{ printf "%#v" .Site.Data.git }}
+    </pre>
+
+    <h2>Current Page Git Info</h2>
+    {{ $currentPath := .File.Path }} {{ with .Site.Data.git.files }} {{ with
+    index . $currentPath }}
+    <pre>
+Edition Count: {{ .edition_count }}
+Latest Commit: {{ .latest_commit.hash }}
+Author: {{ .latest_commit.author }}
+Date: {{ .latest_commit.date }}
+    </pre>
+    {{ else }}
+    <pre>No data found for current page path: {{ $currentPath }}</pre>
+    {{ end }} {{ else }}
+    <pre>No files data available in .Site.Data.git.files</pre>
+    {{ end }}
+
+    <h2>Environment:</h2>
+    <pre>
+Hugo Version: {{ hugo.Version }}
+Environment: {{ hugo.Environment }}
+    </pre>
+</div>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="home-page">
+    <div class="posts">
+        {{ $pages := where site.RegularPages "Type" "posts" }} {{ range first 1
+        $pages }}
+        <article class="post">
+            <div class="title-block">
+                <h1 class="post-title">{{ .Title }}</h1>
+                <div class="edition">
+                    {{ partial "edition-counter.html" . }}
+                </div>
+            </div>
+
+            <div class="post-content">{{ .Content }}</div>
+        </article>
+        {{ else }}
+        <p>There's nothing here – Please check later.</p>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
