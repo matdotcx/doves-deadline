@@ -53,12 +53,13 @@ A typography-focused Hugo theme inspired by the historic Doves Type. This theme 
 - RSS feed support
 - Blockquote styling with accent colors
 - Clean archive page layout
+- CV styling support
 
 ---
 ## Requirements
 
 ### Hugo Version
-Requires Hugo Extended v0.137.1 or later.
+Requires Hugo Extended v0.80.0 or later.
 
 ### Required Fonts
 This theme is designed to use Doves Type, a commercial digital revival:
@@ -81,7 +82,7 @@ For code blocks, the theme uses Fira Code (included):
 ---
 ## Quick Start
 
-1. Install Hugo Extended v0.137.1 or later
+1. Install Hugo Extended v0.80.0 or later
 2. Create a new site and add the theme:
 ```bash
 hugo new site yoursite
@@ -183,9 +184,9 @@ Add this to your GitHub Actions workflow:
 Posts automatically track their revision history using Git data.
 
 ### Build Statistics
-Use the stats shortcode to display build information:
-```go {title="Stats Shortcode"}
-{{</* stats */>}}
+The build-stats.html partial is included to display build statistics when the data is available:
+```html {title="Build Statistics Partial"}
+{{- partial "build-stats.html" . -}}
 ```
 
 ### Blockquotes
@@ -220,34 +221,36 @@ Dark mode colors are customizable via the [data-theme="dark"] selector.
 
 ### Directory Structure
 ```md {title="Theme Structure"}
-themes/doves/
+/
 ├── archetypes/
 │   └── default.md
 ├── assets/
 │   └── css/
 │       ├── style.css
-│       └── syntax.css
+│       ├── syntax.css
+│       └── cv.css
 ├── layouts/
 │   ├── _default/
-│   │   ├── archives.html
 │   │   ├── baseof.html
+│   │   ├── git-debug.html
 │   │   ├── list.html
 │   │   └── single.html
-│   ├── partials/
-│   │   ├── build-stats.html
-│   │   ├── edition-counter.html
-│   │   ├── footer.html
-│   │   ├── head.html
-│   │   ├── header.html
-│   │   └── ordinal.html
-│   └── shortcodes/
-│       └── stats.html
+│   ├── index.html
+│   ├── media/
+│   │   └── list.html
+│   └── partials/
+│       ├── build-stats.html
+│       ├── edition-counter.html
+│       ├── footer.html
+│       ├── head.html
+│       ├── header.html
+│       ├── ordinal.html
+│       └── printer-mark.html
 ├── static/
-│   └── type/  # Type directory (typefaces not included)
+│   └── type/  # Contains Fira Code fonts
 ├── LICENSE
 ├── README.md
-├── theme.toml
-└── .gitignore
+└── theme.toml
 ```
 
 ### Performance Considerations
