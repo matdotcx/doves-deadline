@@ -2,9 +2,14 @@
 <article class="post single-post">
     <div class="title-block">
         <h1 class="post-title">{{ .Title }}</h1>
-        <div class="edition">{{ partial "edition-counter.html" . }}</div>
+        {{ partial "edition-counter.html" . }}
     </div>
 
-    <div class="post-content">{{ .Content }}</div>
+    <div class="post-content">
+        {{ $content := .Content }}
+        {{ $content := replaceRE `<section class="footnotes[^>]*>` `<div class="footnotes">` $content }}
+        {{ $content := replaceRE `</section>` `</div>` $content }}
+        {{ $content | safeHTML }}
+    </div>
 </article>
 {{ end }}

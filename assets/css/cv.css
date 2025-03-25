@@ -1,0 +1,390 @@
+/* CV specific styling */
+.cv-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    font-family: "DovesType-Text", serif;
+}
+
+.cv-download-link {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 0.9rem;
+}
+
+.cv-download-link a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--background-color);
+    color: var(--link-color);
+    text-decoration: none;
+    border: 1px solid var(--link-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.cv-download-link a:hover {
+    background-color: var(--link-color);
+    color: var(--background-color);
+}
+
+.cv-download-link .separator {
+    margin: 0 0.5rem;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Special fix for the three dots on CV page */
+.post.single-post .title-block::before {
+    left: 0;
+    top: 0;
+}
+
+.cv-name-header {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.cv-name-header h1 {
+    font-family: "DovesType-Headline", serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.cv-summary {
+    margin: 2rem 0;
+    font-size: 1rem; /* Changed from 1.1rem to match body text */
+    line-height: 1.5;
+}
+
+.cv-summary p {
+    margin-bottom: 1em;
+}
+
+.cv-section {
+    margin: 2.5rem 0;
+}
+
+.cv-section-title {
+    font-family: "DovesType-Headline", serif;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--link-color);
+    padding-bottom: 0.3rem;
+    opacity: 0.9;
+}
+
+.cv-achievements {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.cv-achievements li {
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    font-size: 1rem; /* Ensure consistent font size */
+}
+
+.cv-position {
+    margin: 1.5rem 0;
+}
+
+.cv-position-header {
+    margin-bottom: 0.5rem;
+}
+
+.cv-position p {
+    font-size: 1rem; /* Ensure consistent font size */
+    line-height: 1.4;
+}
+
+.header-row,
+.position-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.cv-company {
+    font-family: "DovesType-Headline", serif;
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.cv-title {
+    font-size: 1.1rem;
+    margin: 0.3rem 0;
+    letter-spacing: 0.02em;
+}
+
+.cv-period {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-align: right;
+}
+
+.cv-responsibilities {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0.8rem 0;
+}
+
+.cv-responsibilities li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    font-size: 1rem; /* Ensure consistent font size */
+}
+
+.cv-skills, .cv-education, .cv-certifications, .cv-skills-list, .cv-references {
+    margin: 1rem 0;
+}
+
+.cv-skills p, .cv-education p, .cv-certifications p, .cv-skills-list p, .cv-references p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+    font-size: 1rem; /* Ensure consistent font size */
+}
+
+.cv-skills a, .cv-references a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.cv-skills a:hover, .cv-references a:hover {
+    opacity: var(--link-hover-opacity);
+}
+
+.paragraph-separator {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.cv-skills-list {
+    margin-top: 1.5rem;
+}
+
+.cv-skills-list p strong {
+    font-family: "DovesType-Text", serif;
+    font-weight: normal;
+    color: var(--text-color);
+    letter-spacing: 0.03em;
+    opacity: 0.9;
+}
+
+.cv-education .institution,
+.cv-certifications .cert-title,
+.cv-languages .lang-title {
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+}
+
+.cv-education .degree,
+.cv-certifications .cert-details,
+.cv-languages .lang-details {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.cv-languages {
+    margin-top: 1rem;
+}
+
+.cv-languages p {
+    margin: 0.3rem 0;
+}
+
+/* Remove ALL drop caps in CV sections */
+.cv-container p::first-letter,
+.cv-education p::first-letter,
+.cv-certifications p::first-letter,
+.cv-languages p::first-letter,
+.cv-summary p::first-letter,
+.cv-section p::first-letter,
+.cv-position p::first-letter,
+.cv-skills p::first-letter,
+.cv-skills-list p::first-letter {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: inherit !important;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .cv-header h1 {
+        font-size: 2rem;
+    }
+    
+    .cv-section-title {
+        font-size: 1.2rem;
+    }
+    
+    .cv-company {
+        font-size: 1.1rem;
+    }
+    
+    .cv-summary {
+        font-size: 1rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    /* Hide the three dots when printing */
+    .title-block::before {
+        display: none !important;
+    }
+    
+    /* Remove drop caps when printing */
+    .post-content p:first-of-type::first-letter {
+        font-family: inherit;
+        font-size: inherit;
+        float: none;
+        padding: 0;
+        margin: 0;
+        color: inherit;
+    }
+    body {
+        background: white;
+        font-size: 12pt;
+        line-height: 1.3;
+        color: black;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    article.post {
+        margin: 0;
+    }
+    
+    .cv-container {
+        max-width: 100%;
+        font-size: 11pt;
+        line-height: 1.3;
+        padding: 0;
+    }
+    
+    .cv-header {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+    
+    .cv-header h1 {
+        font-size: 16pt;
+    }
+    
+    .cv-section {
+        page-break-inside: avoid;
+        margin: 1.2rem 0;
+    }
+    
+    .cv-position {
+        page-break-inside: avoid;
+        margin: 0.8rem 0;
+    }
+    
+    .cv-section-title {
+        font-size: 13pt;
+        border-bottom: 1px solid #999;
+        color: black;
+    }
+    
+    .cv-company {
+        font-size: 12pt;
+    }
+    
+    .cv-title {
+        font-size: 11pt;
+    }
+    
+    /* Preserve job heading alignment in print */
+    .header-row,
+    .position-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.2rem;
+    }
+    
+    .cv-download-link,
+    .site-header, 
+    .site-footer,
+    .theme-toggle,
+    .title-block::before {
+        display: none;
+    }
+    
+    .title-block {
+        margin: 0 0 1rem 0;
+        padding: 0;
+    }
+    
+    .title-block h1 {
+        font-size: 18pt;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cv-summary,
+    .cv-achievements li,
+    .cv-responsibilities li,
+    .cv-position p,
+    .cv-skills p {
+        font-size: 10pt;
+    }
+    
+    .cv-summary p {
+        margin-bottom: 0.8em;
+    }
+    
+    a {
+        color: #5d5d5d;
+        text-decoration: underline;
+    }
+    
+    .cv-header .contact-info,
+    .cv-header .keywords {
+        font-size: 10pt;
+    }
+    
+    .cv-skills-list {
+        margin-top: 0.5rem;
+    }
+    
+    .cv-skills-list p {
+        font-size: 10pt;
+        margin: 0.2rem 0;
+    }
+    
+    .cv-skills-list p strong {
+        font-weight: bold;
+    }
+    
+    .edition {
+        display: none;
+    }
+}

@@ -12,9 +12,10 @@
     />
 
     <!-- CSS -->
-    {{ $style := resources.Get "css/style.css" }} {{ $syntax := resources.Get
-    "css/syntax.css" }} {{ $css := slice $style $syntax | resources.Concat
-    "css/bundle.css" | resources.Minify }}
+    {{ $style := resources.Get "css/style.css" }} 
+    {{ $syntax := resources.Get "css/syntax.css" }}
+    {{ $cv := resources.Get "css/cv.css" }}
+    {{ $css := slice $style $syntax $cv | resources.Concat "css/bundle.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
     <!-- Theme Script -->

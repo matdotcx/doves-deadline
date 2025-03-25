@@ -6,9 +6,7 @@
         <article class="post">
             <div class="title-block">
                 <h1 class="post-title">{{ .Title }}</h1>
-                <div class="edition">
-                    {{ partial "edition-counter.html" . }}
-                </div>
+                {{ partial "edition-counter.html" . }}
             </div>
 
             <div class="post-content">{{ .Content }}</div>

@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="post single-post">
+    <div class="title-block">
+        <h1 class="post-title">Directory Access</h1>
+    </div>
+
+    <div class="post-content">
+        <p>Directory listings are not available on this site. If you're looking for specific content, you might find it through:</p>
+
+        <ul style="margin-top: 2em;">
+            <li><a href="/archives/">The Archives</a> — A chronological listing of all published content</li>
+            <li><a href="/">The Homepage</a> — The latest published work</li>
+        </ul>
+
+        <div style="margin-top: 3em; padding-top: 2em; border-top: 1px solid rgba(35, 35, 35, 0.1);">
+            <h2 style="font-size: 1em; margin-bottom: 1em;">Recent Posts:</h2>
+            {{ range first 3 (where .Site.RegularPages "Type" "posts") }}
+                <p style="margin: 0.5em 0;">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    <span style="color: var(--text-color); opacity: 0.5; font-size: 0.9em;"> — {{ .Date.Format "January 2, 2006" }}</span>
+                </p>
+            {{ end }}
+        </div>
+    </div>
+</article>
+{{ end }}

@@ -1,0 +1,103 @@
+{{- /* Printer's Mark Partial */ -}} {{- $class := .class | default
+"printer-mark" -}}
+<div class="{{ $class }}">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 300 440"
+        aria-label="Deadline Printer's Mark"
+    >
+        <!-- Outer frame -->
+        <circle
+            cx="150"
+            cy="200"
+            r="110"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+        />
+        <circle
+            cx="150"
+            cy="200"
+            r="100"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        />
+
+        <!-- IHS Cross -->
+        <line
+            x1="150"
+            y1="120"
+            x2="150"
+            y2="280"
+            stroke="var(--link-color)"
+            stroke-width="3"
+        />
+        <line
+            x1="100"
+            y1="200"
+            x2="200"
+            y2="200"
+            stroke="var(--link-color)"
+            stroke-width="3"
+        />
+
+        <!-- Stylized books/scrolls forming chi-rho -->
+        <path
+            d="M120 140q-20 60 0 120"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        />
+        <path
+            d="M180 140q20 60 0 120"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        />
+
+        <!-- Circuit-like patterns -->
+        <path
+            d="M90 180q60-30 120 0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+        />
+        <path
+            d="M90 220q60 30 120 0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+        />
+
+        <!-- Points of connection -->
+        <circle cx="150" cy="140" r="4" fill="var(--link-color)" />
+        <circle cx="150" cy="260" r="4" fill="var(--link-color)" />
+
+        <!-- AMDG -->
+        <text
+            x="150"
+            y="350"
+            text-anchor="middle"
+            font-family="DovesType-Text"
+            font-size="14"
+            fill="currentColor"
+        >
+            A·M·D·G
+        </text>
+
+        <!-- Year -->
+        <text
+            x="150"
+            y="380"
+            text-anchor="middle"
+            font-family="DovesType-Text"
+            font-size="16"
+            fill="currentColor"
+        >
+            MMXXV
+        </text>
+    </svg>
+</div>

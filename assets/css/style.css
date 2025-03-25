@@ -56,38 +56,29 @@
     font-display: block;
 }
 
-/* Inline code styling */
-:not(pre) > code {
-    font-family: "Fira Code", monospace;
-    font-size: 0.65em;
-    line-height: 1.5;
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    background: rgba(16, 15, 15, 0.03);
-    border: 1px solid rgba(16, 15, 15, 0.1);
-    color: var(--text-color);
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    vertical-align: baseline;
-    opacity: 0.75;
-}
-
-[data-theme="dark"] :not(pre) > code {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0.85;
+/* Prevent layout shift from scrollbar */
+html {
+    overflow-y: scroll;
 }
 
 /* Base document styles */
 body {
-    font: 20px "DovesType-Text", serif;
+    /* Separate font properties for better inheritance */
+    font-family: "DovesType-Text", serif;
+    font-size: 20px;
     line-height: 1.4;
     color: var(--text-color);
     background: var(--background-color);
     padding: 2em;
     margin: 0;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "kern" 1, "lnum" 1;
+    font-feature-settings:
+        "kern" 1,
+        "liga" 1,
+        "calt" 1,
+        "lnum" 1,
+        "dlig" 1,
+        "hlig" 1;
     font-kerning: normal;
     text-align: left;
     overflow-wrap: break-word;
@@ -115,7 +106,6 @@ body {
     position: relative;
     overflow: visible;
 }
-
 /* Header */
 .site-header {
     padding: 0.7rem 2rem 0.4rem;
@@ -133,7 +123,8 @@ body {
 }
 
 .site-title {
-    font: 20px "DovesType-Text", serif;
+    font-family: "DovesType-Text", serif;
+    font-size: inherit;
     color: var(--text-color);
     text-decoration: none;
 }
@@ -147,7 +138,8 @@ body {
 }
 
 .main-nav a {
-    font: 20px "DovesType-Text", serif;
+    font-family: "DovesType-Text", serif;
+    font-size: inherit;
     color: var(--text-color);
     text-decoration: none;
     opacity: 0.6;
@@ -234,6 +226,28 @@ body {
     color: var(--background-color);
 }
 
+/* Code styling */
+:not(pre) > code {
+    font-family: "Fira Code", monospace;
+    font-size: 0.65em;
+    line-height: 1.5;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    background: rgba(16, 15, 15, 0.03);
+    border: 1px solid rgba(16, 15, 15, 0.1);
+    color: var(--text-color);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    vertical-align: baseline;
+    opacity: 0.75;
+    white-space: nowrap;
+}
+
+[data-theme="dark"] :not(pre) > code {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0.85;
+}
 /* Title block with edition */
 .title-block {
     margin: 6em 0 2.5em 0;
@@ -249,7 +263,8 @@ body {
     position: relative;
 }
 
-.post-title::before {
+/* Three dots styling for title blocks */
+.title-block::before {
     content: "• • •";
     position: absolute;
     top: 0;
@@ -259,6 +274,127 @@ body {
     letter-spacing: 0.75em;
     opacity: 0.7;
     font-family: "DovesType-Text", serif;
+    z-index: 1;
+}
+
+/* Adjust h2 with small caps but smaller size */
+h2 {
+    font-weight: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+    font-size: 18px; /* Reduced from default size */
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+}
+
+/* Adjust h3 with small caps but smaller size */
+h3 {
+    font-weight: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+    font-size: 16px; /* Reduced from default size */
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+}
+
+/* Base styles for ordered lists */
+.post-content ol {
+    margin: 1.4em 0;
+    padding-left: 1.25rem;
+    list-style-position: outside;
+}
+
+/* Base styles for ordered lists */
+.post-content ol {
+    margin: 1.4em 0;
+    padding-left: 1.25rem;
+    list-style-position: outside;
+}
+
+.post-content li {
+    font-family: "DovesType-Text", serif;
+    font-size: inherit; /* Inherit from body instead of hardcoding */
+    line-height: 1.4;
+    padding-left: 0.75rem;
+    margin: 0.7em 0;
+}
+
+/* Specific footnote styling */
+.post-content .footnotes {
+    margin: 2em 0;
+    padding-left: 2em;
+    counter-reset: footnote;
+}
+
+.post-content .footnotes ol {
+    list-style: none;
+    margin: 0;
+}
+
+.post-content .footnotes li {
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin: 0.5em 0;
+    position: relative;
+    color: var(--text-color);
+    opacity: 0.9;
+    padding-left: 0;
+}
+
+/* Prevent drop cap styling for footnotes */
+.post-content .footnotes li p:first-of-type::first-letter {
+    font-family: inherit;
+    font-size: inherit;
+    float: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+}
+
+/* Create custom numbering that matches style */
+.post-content .footnotes li::before {
+    counter-increment: footnote;
+    content: counter(footnote) ".";
+    position: absolute;
+    left: -2em;
+    color: var(--link-color);
+    opacity: 0.9;
+    font-family: "DovesType-Text", serif;
+}
+
+/* Style footnote links */
+.post-content .footnotes a {
+    color: var(--link-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.post-content .footnotes a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Remove default horizontal rule if present */
+.post-content .footnotes hr {
+    display: none;
+}
+
+/* Add subtle separator above footnotes section */
+.post-content .footnotes::before {
+    content: "";
+    display: block;
+    width: 15%;
+    height: 1px;
+    background: var(--text-color);
+    opacity: 0.2;
+    margin: 2em 0;
+}
+
+
+/* Ensure archive entries don't get dots */
+.archive-list .title-block::before {
+    content: none;
 }
 
 /* Edition styling */
@@ -266,7 +402,7 @@ body {
     margin-top: 0.5em;
     text-align: right;
     font-size: 14px;
-    opacity: 0.65;
+    opacity: 0.85;
     letter-spacing: 0.02em;
 }
 
@@ -276,7 +412,7 @@ body {
 
 .edition .number {
     color: var(--dropcap-color);
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .edition .dates {
@@ -284,7 +420,7 @@ body {
 }
 
 .edition .revision {
-    opacity: 0.75;
+    opacity: 0.85;
     margin-top: 0.2em;
 }
 
@@ -312,7 +448,7 @@ blockquote {
     border-left-color: var(--dropcap-color);
 }
 
-/* Drop cap styles */
+/* Drop cap styles - disabled for CV pages */
 .post-content p:first-of-type::first-letter {
     font-family: "DovesType-Headline", serif;
     font-size: 3.5em;
@@ -325,12 +461,43 @@ blockquote {
     color: var(--dropcap-color);
 }
 
+/* Disable drop caps for CV page */
+.cv-container .post-content p::first-letter,
+.cv-section .post-content p::first-letter,
+body.cv-page .post-content p::first-letter,
+.cv-page p::first-letter,
+.cv-section p::first-letter,
+.cv-container p::first-letter,
+.cv-education p::first-letter,
+.cv-certifications p::first-letter,
+.cv-languages p::first-letter,
+.cv-skills p::first-letter {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: inherit !important;
+}
+
 /* Chrome-specific adjustments */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     .post-content p:first-of-type::first-letter {
         line-height: 0.7;
         padding-top: 0.2em;
         padding-right: 0.05em;
+    }
+    
+    /* Disable drop caps for CV in Chrome */
+    .cv-page .post-content p::first-letter,
+    .cv-section p::first-letter,
+    .cv-container p::first-letter {
+        font-family: inherit !important;
+        font-size: inherit !important;
+        float: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        color: inherit !important;
     }
 }
 
@@ -346,7 +513,66 @@ a:hover {
     opacity: var(--link-hover-opacity);
 }
 
-/* Lists */
+/* Emphasis styling */
+/* Redefine strong and b elements to use small caps instead of bold */
+strong, b {
+    /* Remove default bold styling */
+    font-weight: normal;
+    
+    /* Apply small caps for typographically appropriate emphasis */
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+}
+
+/* Ensure small caps look good in headings */
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong,
+h1 b, h2 b, h3 b, h4 b, h5 b, h6 b {
+    /* Slightly adjust letter-spacing for headings */
+    letter-spacing: 0.01em;
+}
+
+/* Ensure emphasis within links is properly styled */
+a strong, a b, strong a, b a {
+    /* Inherit link color */
+    color: inherit;
+    /* Preserve the small caps styling */
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+}
+
+/* Optional: For extra emphasis, add subtle highlight for important terms */
+.emphasis-highlight {
+    position: relative;
+    z-index: 1;
+}
+
+.emphasis-highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: rgba(255, 121, 0, 0.12); /* Based on your link color */
+    z-index: -1;
+    border-radius: 3px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .emphasis-highlight::after {
+    background-color: rgba(255, 146, 72, 0.15); /* Based on dark mode link color */
+}
+
+/* Block-level emphasis for callouts or important sections */
+.emphasis-block {
+    display: block;
+    padding-left: 1em;
+    margin-left: 0.5em;
+    border-left: 2px solid var(--link-color);
+    line-height: 1.5;
+}
+
+/* Lists - General */
 ul,
 ol {
     margin: 1.4em 0;
@@ -355,32 +581,91 @@ ol {
 }
 
 li {
-    font: 20px "DovesType-Text", serif;
+    font-family: "DovesType-Text", serif;
+    font-size: inherit; /* Inherit from body instead of hardcoding */
     line-height: 1.4;
     padding-left: 0.75rem;
     margin: 0.7em 0;
 }
 
-/* Archive Lists */
+/* Archive Layout and Structure */
 .archive-list {
     list-style: none;
     padding: 0;
 }
 
 .archive-list li {
-    margin: 0.5em 0;
+    margin-bottom: 1.4em;
     padding: 0;
-    display: flex;
-    gap: 0.5em;
 }
 
-.archive-list time {
+.archive-section + .archive-section {
+    margin-top: 3em;
+}
+
+/* Archive Section Headers */
+.archive-section h2 {
+    font: 21.25px "DovesType-Headline", serif;
     color: var(--text-color);
-    white-space: nowrap;
-    font: 20px "DovesType-Text", serif;
-    opacity: 1;
-    margin: 0;
+    margin: 0 0 1.2em;
+    line-height: 1.2;
+}
+
+.archive-section:first-child h2 {
+    margin-top: 0;
+}
+
+/* Archive styling simplified */
+
+/* Archive entries */
+.archive-list .post-title {
+    font-family: "DovesType-Text", serif;
+    font-size: inherit;
+    line-height: 1.4;
+}
+
+/* Archive main title - new implementation */
+.archive-title {
+    font: 21.25px "DovesType-Headline", serif;
+    color: var(--text-color);
+    margin: 1.5em 0 1.5em 0;
+    line-height: 1.2;
+    position: relative;
+}
+
+.archive .post-title a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.archive .post-title a:hover {
+    opacity: var(--link-hover-opacity);
+    text-decoration: underline;
+}
+
+.archive .post-title .archive-date {
+    font: 16px "DovesType-Text", serif;
+    color: var(--text-color);
     display: inline;
+    margin-left: 0.5em;
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+/* Description and Subtitle Styling */
+.archive .post-subtitle-indicator {
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-right: 0.4em;
+}
+
+.archive .entry-description {
+    margin-top: 0.3em;
+    margin-left: 1em;
+    color: var(--text-color);
+    opacity: 0.8;
+    font: 16px "DovesType-Text", serif;
+    line-height: 1.4;
 }
 
 /* Footer */
@@ -417,7 +702,6 @@ li {
 .syndicate-link svg {
     transform: translateY(-1px);
 }
-
 /* Selection */
 ::selection {
     background: var(--selection-background);
@@ -483,6 +767,16 @@ li {
     .post-content {
         font-size: 19px;
     }
+    .archive-list .post-title {
+        font-size: 19px;
+    }
+    .archive .post-title .archive-date {
+        font-size: 15px;
+    }
+    .archive .entry-description {
+        font-size: 15px;
+        margin-left: 0.8em;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -511,6 +805,19 @@ li {
     .edition {
         font-size: 13px;
     }
+    .archive-list .post-title {
+        font-size: 18px;
+    }
+    .archive .post-title .archive-date {
+        font-size: 14px;
+    }
+    .archive .entry-description {
+        font-size: 14px;
+        margin-left: 0.6em;
+    }
+    .archive-section + .archive-section {
+        margin-top: 2em;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -537,8 +844,101 @@ li {
     .post-content {
         font-size: 16px;
     }
+    .archive-list .post-title {
+        font-size: 16px;
+    }
+    .archive .post-title .archive-date {
+        font-size: 13px;
+        margin-left: 0.3em;
+    }
+    .archive .entry-description {
+        font-size: 13px;
+        margin-left: 0.5em;
+    }
+    .archive-section h2 {
+        font-size: 19px;
+    }
+
+/* Footer Styling */     
+}.site-footer {
+    text-align: center;
+    margin-top: 96px;
+    padding: 2rem 0;
+    font: 14px "DovesType-Text", serif;  /* Back to original smaller size */
+    color: var(--text-color);
+    opacity: var(--footer-opacity);
 }
 
+.footer-links {
+    margin-bottom: 1em;
+    font-size: 14px;  /* Restored to original size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.syndicate-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.syndicate-icon {
+    display: flex;
+    align-items: center;
+    transform: translateY(-1px);
+}
+
+.separator {
+    margin: 0 0.5em;
+}
+
+.footer-content {
+    margin-top: 1em;
+    opacity: 0.8;
+}
+
+.footer-copyright {
+    margin-top: 0.5em;
+    font-size: 14px;  /* Keeping copyright same size as other footer text */
+    opacity: 0.7;
+}
+
+/* Printer's mark styling */
+.footer-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 0;
+}
+
+.footer-mark svg {
+    width: 120px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.footer-mark:hover svg {
+    opacity: 1;
+}
+
+.footer-mark::before {
+    content: "• • •";
+    display: block;
+    color: var(--link-color);
+    opacity: 0.7;
+    margin-bottom: 1.5em;
+    font-size: 0.7em;
+    letter-spacing: 0.75em;
+}
 /* Print styles */
 @media print {
     .main {
