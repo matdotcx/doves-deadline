@@ -43,17 +43,19 @@ Like the metal sorts recovered piece by piece from the Thames through patience, 
 
 A typography-focused Hugo theme inspired by the historic Doves Type. This theme emphasizes readability, whitespace, and elegant type presentation, featuring:
 
-- Typography-first design approach
-- Responsive layout
+- Typography-first design approach with CSS variables for easy customization
+- Responsive layout optimized for all screen sizes
 - Dark mode with color-matched palettes
-- Drop caps for article openings
+- Drop caps for article openings (with CV page exceptions)
 - Edition counter for content versioning
 - Build statistics integration
 - Syntax highlighting with Flexoki colors
 - RSS feed support
 - Blockquote styling with accent colors
 - Clean archive page layout
-- CV styling support
+- CV styling support with refined typography
+- Improved accessibility with proper focus states
+- Consolidated and optimized CSS
 
 ---
 ## Requirements
@@ -62,16 +64,15 @@ A typography-focused Hugo theme inspired by the historic Doves Type. This theme 
 Requires Hugo Extended v0.80.0 or later.
 
 ### Required Fonts
-This theme is designed to use Doves Type, a commercial digital revival:
+This theme is designed to use Doves Type, a commercial digital revival by Robert Green. **Note: Doves Type fonts are commercially licensed and must be purchased separately from https://typespec.co.uk/doves-type/.** The theme will gracefully fall back to system serif fonts if Doves Type is not available.
 
-- Doves Type Headline (21.25px for titles)
-- Doves Type Text (20px for body content)
-
-Font files needed in your `/static/type/` directory:
-- DovesTypeHeadline-Regular.woff2
-- DovesTypeHeadline-Regular.woff
-- DovesTypeText-Regular.woff2
-- DovesTypeText-Regular.woff
+To use Doves Type fonts:
+1. Purchase licenses from https://typespec.co.uk/doves-type/
+2. Add the following files to your `/static/type/` directory:
+   - DovesTypeHeadline-Regular.woff2
+   - DovesTypeHeadline-Regular.woff
+   - DovesTypeText-Regular.woff2
+   - DovesTypeText-Regular.woff
 
 For code blocks, the theme uses Fira Code (included):
 - FiraCode-Light.woff2
@@ -87,7 +88,7 @@ For code blocks, the theme uses Fira Code (included):
 ```bash
 hugo new site yoursite
 cd yoursite
-git submodule add https://github.com/yourusername/hugo-doves-theme.git themes/doves
+git submodule add https://github.com/matdotcx/doves-deadline.git themes/doves
 ```
 3. Copy the example configuration:
 ```bash
@@ -109,7 +110,7 @@ cd yoursite
 
 2. Add the theme:
 ```bash {title="Add Theme"}
-git submodule add https://github.com/yourusername/hugo-doves-theme.git themes/doves
+git submodule add https://github.com/matdotcx/doves-deadline.git themes/doves
 ```
 
 3. Update your hugo.toml:

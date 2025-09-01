@@ -9,6 +9,12 @@
     --footer-opacity: 0.7;
     --code-color: #454545;
     --code-bg: rgba(200, 200, 200, 0.1);
+    --font-headline: "DovesType-Headline", serif;
+    --font-text: "DovesType-Text", serif;
+    --font-code: "Fira Code", monospace;
+    --base-font-size: 20px;
+    --heading-size: 21.25px;
+    --dot-pattern: "• • •";
 }
 
 [data-theme="dark"] {
@@ -64,8 +70,8 @@ html {
 /* Base document styles */
 body {
     /* Separate font properties for better inheritance */
-    font-family: "DovesType-Text", serif;
-    font-size: 20px;
+    font-family: var(--font-text);
+    font-size: var(--base-font-size);
     line-height: 1.4;
     color: var(--text-color);
     background: var(--background-color);
@@ -82,7 +88,6 @@ body {
     font-kerning: normal;
     text-align: left;
     overflow-wrap: break-word;
-    word-break: normal;
     unicode-bidi: isolate;
     transition:
         background-color 0.3s ease,
@@ -106,6 +111,7 @@ body {
     position: relative;
     overflow: visible;
 }
+
 /* Header */
 .site-header {
     padding: 0.7rem 2rem 0.4rem;
@@ -123,7 +129,7 @@ body {
 }
 
 .site-title {
-    font-family: "DovesType-Text", serif;
+    font-family: var(--font-text);
     font-size: inherit;
     color: var(--text-color);
     text-decoration: none;
@@ -138,15 +144,16 @@ body {
 }
 
 .main-nav a {
-    font-family: "DovesType-Text", serif;
+    font-family: var(--font-text);
     font-size: inherit;
     color: var(--text-color);
     text-decoration: none;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: opacity 0.2s ease;
 }
 
-.main-nav a:hover {
+.main-nav a:hover, 
+.main-nav a:focus {
     opacity: 1;
     text-decoration: underline;
 }
@@ -163,6 +170,11 @@ body {
     cursor: pointer;
     padding: 0;
     transition: background-color 0.3s ease;
+}
+
+.theme-toggle:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
 }
 
 .toggle-icons {
@@ -228,26 +240,26 @@ body {
 
 /* Code styling */
 :not(pre) > code {
-    font-family: "Fira Code", monospace;
+    font-family: var(--font-code);
     font-size: 0.65em;
     line-height: 1.5;
     padding: 0.2em 0.4em;
     border-radius: 3px;
-    background: rgba(16, 15, 15, 0.03);
-    border: 1px solid rgba(16, 15, 15, 0.1);
-    color: var(--text-color);
+    background: rgba(16, 15, 15, 0.1);
+    border: 1px solid rgba(16, 15, 15, 0.15);
+    color: var(--code-color);
     font-weight: 300;
     letter-spacing: -0.02em;
     vertical-align: baseline;
-    opacity: 0.75;
-    white-space: nowrap;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 [data-theme="dark"] :not(pre) > code {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0.85;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
 /* Title block with edition */
 .title-block {
     margin: 6em 0 2.5em 0;
@@ -255,7 +267,7 @@ body {
 }
 
 .post-title {
-    font: 21.25px "DovesType-Headline", serif;
+    font: var(--heading-size) var(--font-headline);
     color: var(--text-color);
     line-height: 1.2;
     margin: 0;
@@ -263,9 +275,9 @@ body {
     position: relative;
 }
 
-/* Three dots styling for title blocks */
-.title-block::before {
-    content: "• • •";
+/* Three dots styling - shared between elements that use it */
+.decorated-element::before {
+    content: var(--dot-pattern);
     position: absolute;
     top: 0;
     left: 0;
@@ -273,50 +285,84 @@ body {
     font-size: 0.7em;
     letter-spacing: 0.75em;
     opacity: 0.7;
-    font-family: "DovesType-Text", serif;
+    font-family: var(--font-text);
     z-index: 1;
 }
 
-/* Adjust h2 with small caps but smaller size */
+/* Apply the decoration to title blocks */
+.title-block::before {
+    content: var(--dot-pattern);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--link-color);
+    font-size: 0.7em;
+    letter-spacing: 0.75em;
+    opacity: 0.7;
+    font-family: var(--font-text);
+    z-index: 1;
+}
+
+/* Ensure archive entries don't get dots */
+.archive-list .title-block::before {
+    content: none;
+}
+
+/* Headings */
 h2 {
+    font-family: var(--font-text);
     font-weight: normal;
     font-variant: small-caps;
     letter-spacing: 0.02em;
-    font-size: 18px; /* Reduced from default size */
+    font-size: 18px;
     margin-top: 2em;
     margin-bottom: 0.8em;
 }
 
-/* Adjust h3 with small caps but smaller size */
 h3 {
+    font-family: var(--font-text);
     font-weight: normal;
     font-variant: small-caps;
     letter-spacing: 0.02em;
-    font-size: 16px; /* Reduced from default size */
+    font-size: 16px;
     margin-top: 2em;
     margin-bottom: 0.8em;
 }
 
-/* Base styles for ordered lists */
-.post-content ol {
+/* Content area specific heading styles */
+.post-content h2 {
+    font-family: var(--font-headline);
+    font-size: var(--heading-size);
+    font-weight: normal;
+    font-variant: normal;
+    letter-spacing: normal;
+    color: var(--text-color);
+    margin: 2em 0 1rem 0;
+    border-bottom: 1px solid var(--link-color);
+    padding-bottom: 0.3rem;
+    opacity: 0.9;
+    line-height: 1.2;
+}
+
+/* Lists - General */
+ul,
+ol {
     margin: 1.4em 0;
     padding-left: 1.25rem;
     list-style-position: outside;
 }
 
-/* Base styles for ordered lists */
-.post-content ol {
-    margin: 1.4em 0;
-    padding-left: 1.25rem;
-    list-style-position: outside;
-}
-
-.post-content li {
-    font-family: "DovesType-Text", serif;
-    font-size: inherit; /* Inherit from body instead of hardcoding */
+li {
+    font-family: var(--font-text);
+    font-size: inherit;
     line-height: 1.4;
     padding-left: 0.75rem;
     margin: 0.7em 0;
+}
+
+/* Post-specific lists */
+.post-content li {
+    /* Inherit from general li styles */
 }
 
 /* Specific footnote styling */
@@ -359,14 +405,13 @@ h3 {
     left: -2em;
     color: var(--link-color);
     opacity: 0.9;
-    font-family: "DovesType-Text", serif;
+    font-family: var(--font-text);
 }
 
 /* Style footnote links */
 .post-content .footnotes a {
     color: var(--link-color);
     text-decoration: none;
-    opacity: 0.8;
     transition: opacity 0.2s ease;
 }
 
@@ -389,12 +434,6 @@ h3 {
     background: var(--text-color);
     opacity: 0.2;
     margin: 2em 0;
-}
-
-
-/* Ensure archive entries don't get dots */
-.archive-list .title-block::before {
-    content: none;
 }
 
 /* Edition styling */
@@ -432,8 +471,6 @@ article {
 .post-content {
     max-width: 100%;
     overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
     hyphens: auto;
 }
 
@@ -444,13 +481,9 @@ blockquote {
     border-left: 3px solid var(--dropcap-color);
 }
 
-[data-theme="dark"] blockquote {
-    border-left-color: var(--dropcap-color);
-}
-
 /* Drop cap styles - disabled for CV pages */
 .post-content p:first-of-type::first-letter {
-    font-family: "DovesType-Headline", serif;
+    font-family: var(--font-headline);
     font-size: 3.5em;
     line-height: 0.8;
     float: left;
@@ -462,16 +495,8 @@ blockquote {
 }
 
 /* Disable drop caps for CV page */
-.cv-container .post-content p::first-letter,
-.cv-section .post-content p::first-letter,
-body.cv-page .post-content p::first-letter,
-.cv-page p::first-letter,
-.cv-section p::first-letter,
-.cv-container p::first-letter,
-.cv-education p::first-letter,
-.cv-certifications p::first-letter,
-.cv-languages p::first-letter,
-.cv-skills p::first-letter {
+.cv-container .post-content p:first-of-type::first-letter,
+body.cv-page .post-content p:first-of-type::first-letter {
     font-family: inherit !important;
     font-size: inherit !important;
     float: none !important;
@@ -488,10 +513,9 @@ body.cv-page .post-content p::first-letter,
         padding-right: 0.05em;
     }
     
-    /* Disable drop caps for CV in Chrome */
-    .cv-page .post-content p::first-letter,
-    .cv-section p::first-letter,
-    .cv-container p::first-letter {
+    /* Ensure drop caps are disabled in CV pages in Chrome */
+    .cv-container p:first-of-type::first-letter,
+    body.cv-page .post-content p:first-of-type::first-letter {
         font-family: inherit !important;
         font-size: inherit !important;
         float: none !important;
@@ -508,9 +532,23 @@ a {
     transition: opacity 0.2s ease;
 }
 
-a:hover {
+a:hover,
+a:focus {
     text-decoration: underline;
     opacity: var(--link-hover-opacity);
+}
+
+/* Focus styles for form elements only */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+}
+
+/* Remove focus outline for links */
+a:focus {
+    outline: none;
 }
 
 /* Emphasis styling */
@@ -524,13 +562,6 @@ strong, b {
     letter-spacing: 0.02em;
 }
 
-/* Ensure small caps look good in headings */
-h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong,
-h1 b, h2 b, h3 b, h4 b, h5 b, h6 b {
-    /* Slightly adjust letter-spacing for headings */
-    letter-spacing: 0.01em;
-}
-
 /* Ensure emphasis within links is properly styled */
 a strong, a b, strong a, b a {
     /* Inherit link color */
@@ -538,54 +569,6 @@ a strong, a b, strong a, b a {
     /* Preserve the small caps styling */
     font-variant: small-caps;
     letter-spacing: 0.02em;
-}
-
-/* Optional: For extra emphasis, add subtle highlight for important terms */
-.emphasis-highlight {
-    position: relative;
-    z-index: 1;
-}
-
-.emphasis-highlight::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background-color: rgba(255, 121, 0, 0.12); /* Based on your link color */
-    z-index: -1;
-    border-radius: 3px;
-}
-
-/* Dark mode adjustments */
-[data-theme="dark"] .emphasis-highlight::after {
-    background-color: rgba(255, 146, 72, 0.15); /* Based on dark mode link color */
-}
-
-/* Block-level emphasis for callouts or important sections */
-.emphasis-block {
-    display: block;
-    padding-left: 1em;
-    margin-left: 0.5em;
-    border-left: 2px solid var(--link-color);
-    line-height: 1.5;
-}
-
-/* Lists - General */
-ul,
-ol {
-    margin: 1.4em 0;
-    padding-left: 1.25rem;
-    list-style-position: outside;
-}
-
-li {
-    font-family: "DovesType-Text", serif;
-    font-size: inherit; /* Inherit from body instead of hardcoding */
-    line-height: 1.4;
-    padding-left: 0.75rem;
-    margin: 0.7em 0;
 }
 
 /* Archive Layout and Structure */
@@ -603,30 +586,23 @@ li {
     margin-top: 3em;
 }
 
-/* Archive Section Headers */
-.archive-section h2 {
-    font: 21.25px "DovesType-Headline", serif;
-    color: var(--text-color);
-    margin: 0 0 1.2em;
-    line-height: 1.2;
-}
-
 .archive-section:first-child h2 {
     margin-top: 0;
 }
 
-/* Archive styling simplified */
-
 /* Archive entries */
 .archive-list .post-title {
-    font-family: "DovesType-Text", serif;
+    font-family: var(--font-text);
     font-size: inherit;
     line-height: 1.4;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
-/* Archive main title - new implementation */
+/* Archive main title */
 .archive-title {
-    font: 21.25px "DovesType-Headline", serif;
+    font: var(--heading-size) var(--font-headline);
     color: var(--text-color);
     margin: 1.5em 0 1.5em 0;
     line-height: 1.2;
@@ -643,13 +619,20 @@ li {
     text-decoration: underline;
 }
 
-.archive .post-title .archive-date {
-    font: 16px "DovesType-Text", serif;
+/* Date styling for archive items */
+.archive-date {
+    font-size: 0.9rem;
+    font-family: var(--font-text);
     color: var(--text-color);
-    display: inline;
-    margin-left: 0.5em;
-    opacity: 0.5;
+    display: inline-block;
+    min-width: 7em;
+    margin-right: 1em;
+    margin-left: 0;
+    opacity: 0.8;
     white-space: nowrap;
+    text-align: right;
+    font-style: normal;
+    letter-spacing: 0.01em;
 }
 
 /* Description and Subtitle Styling */
@@ -664,7 +647,7 @@ li {
     margin-left: 1em;
     color: var(--text-color);
     opacity: 0.8;
-    font: 16px "DovesType-Text", serif;
+    font: 16px var(--font-text);
     line-height: 1.4;
 }
 
@@ -673,7 +656,7 @@ li {
     text-align: center;
     margin-top: 96px;
     padding: 2rem 0;
-    font: 14px "DovesType-Text", serif;
+    font: 14px var(--font-text);
     color: var(--text-color);
     opacity: var(--footer-opacity);
 }
@@ -681,6 +664,10 @@ li {
 .footer-links {
     margin-bottom: 1em;
     font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
 }
 
 .footer-links a {
@@ -699,9 +686,52 @@ li {
     gap: 0.3em;
 }
 
-.syndicate-link svg {
+.syndicate-icon {
+    display: flex;
+    align-items: center;
     transform: translateY(-1px);
 }
+
+.footer-content {
+    margin-top: 1em;
+    opacity: 0.8;
+}
+
+.footer-copyright {
+    margin-top: 0.5em;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Printer's mark styling */
+.footer-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 0;
+}
+
+.footer-mark svg {
+    width: 120px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.footer-mark:hover svg {
+    opacity: 1;
+}
+
+.footer-mark::before {
+    content: var(--dot-pattern);
+    display: block;
+    color: var(--link-color);
+    opacity: 0.7;
+    margin-bottom: 1.5em;
+    font-size: 0.7em;
+    letter-spacing: 0.75em;
+}
+
 /* Selection */
 ::selection {
     background: var(--selection-background);
@@ -752,6 +782,9 @@ li {
 }
 
 @media screen and (max-width: 840px) {
+    :root {
+        --base-font-size: 19px;
+    }
     .container {
         padding: 0 1rem;
     }
@@ -760,18 +793,15 @@ li {
     }
     body {
         padding: 1.5em;
+        font-size: var(--base-font-size);
     }
     .site-header {
         padding: 0.7rem 1rem 0.4rem;
     }
-    .post-content {
-        font-size: 19px;
-    }
-    .archive-list .post-title {
-        font-size: 19px;
-    }
-    .archive .post-title .archive-date {
-        font-size: 15px;
+    .archive-date {
+        font-size: 0.85rem;
+        min-width: 6.5em;
+        margin-right: 0.8em;
     }
     .archive .entry-description {
         font-size: 15px;
@@ -780,9 +810,12 @@ li {
 }
 
 @media screen and (max-width: 600px) {
+    :root {
+        --base-font-size: 18px;
+    }
     body {
         padding: 1em;
-        font-size: 18px;
+        font-size: var(--base-font-size);
     }
     .container {
         padding: 0 0.75rem;
@@ -805,11 +838,10 @@ li {
     .edition {
         font-size: 13px;
     }
-    .archive-list .post-title {
-        font-size: 18px;
-    }
-    .archive .post-title .archive-date {
-        font-size: 14px;
+    .archive-date {
+        font-size: 0.8rem;
+        min-width: 6em;
+        margin-right: 0.7em;
     }
     .archive .entry-description {
         font-size: 14px;
@@ -821,9 +853,12 @@ li {
 }
 
 @media screen and (max-width: 400px) {
+    :root {
+        --base-font-size: 16px;
+    }
     body {
         padding: 0.75em;
-        font-size: 16px;
+        font-size: var(--base-font-size);
     }
     .container {
         padding: 0 0.5rem;
@@ -841,104 +876,18 @@ li {
     .edition {
         font-size: 12px;
     }
-    .post-content {
-        font-size: 16px;
-    }
-    .archive-list .post-title {
-        font-size: 16px;
-    }
-    .archive .post-title .archive-date {
-        font-size: 13px;
-        margin-left: 0.3em;
+    .archive-date {
+        font-size: 0.75rem;
+        min-width: 5.5em;
+        margin-right: 0.5em;
+        margin-left: 0;
     }
     .archive .entry-description {
         font-size: 13px;
         margin-left: 0.5em;
     }
-    .archive-section h2 {
-        font-size: 19px;
-    }
-
-/* Footer Styling */     
-}.site-footer {
-    text-align: center;
-    margin-top: 96px;
-    padding: 2rem 0;
-    font: 14px "DovesType-Text", serif;  /* Back to original smaller size */
-    color: var(--text-color);
-    opacity: var(--footer-opacity);
 }
 
-.footer-links {
-    margin-bottom: 1em;
-    font-size: 14px;  /* Restored to original size */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5em;
-}
-
-.footer-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-.syndicate-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-}
-
-.syndicate-icon {
-    display: flex;
-    align-items: center;
-    transform: translateY(-1px);
-}
-
-.separator {
-    margin: 0 0.5em;
-}
-
-.footer-content {
-    margin-top: 1em;
-    opacity: 0.8;
-}
-
-.footer-copyright {
-    margin-top: 0.5em;
-    font-size: 14px;  /* Keeping copyright same size as other footer text */
-    opacity: 0.7;
-}
-
-/* Printer's mark styling */
-.footer-mark {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3em;
-    margin-bottom: 0;
-}
-
-.footer-mark svg {
-    width: 120px;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-}
-
-.footer-mark:hover svg {
-    opacity: 1;
-}
-
-.footer-mark::before {
-    content: "• • •";
-    display: block;
-    color: var(--link-color);
-    opacity: 0.7;
-    margin-bottom: 1.5em;
-    font-size: 0.7em;
-    letter-spacing: 0.75em;
-}
 /* Print styles */
 @media print {
     .main {
