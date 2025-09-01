@@ -49,7 +49,7 @@ A typography-focused Hugo theme inspired by the historic Doves Type. This theme 
 - Drop caps for article openings (with CV page exceptions)
 - Edition counter for content versioning
 - Build statistics integration
-- Syntax highlighting with Flexoki colors
+- Syntax highlighting with Manganese colors
 - RSS feed support
 - Blockquote styling with accent colors
 - Clean archive page layout
