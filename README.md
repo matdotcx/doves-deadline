@@ -293,7 +293,7 @@ Tested and optimized for:
 * [Fira Code](https://github.com/tonsky/FiraCode) - By [Nikita Prokopov](https://github.com/tonsky) - [GitHub](https://github.com/tonsky/FiraCode)
 
 ### Colors
-* [Flexoki](https://github.com/kepano/flexoki) color scheme by [Steph Ango](https://github.com/kepano) - [GitHub](https://github.com/kepano/flexoki)
+* [Manganese](https://github.com/matdotcx/manganese) color scheme for syntax highlighting
 
 ### License
 MIT License - See LICENSE file for details
